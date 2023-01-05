@@ -11,9 +11,8 @@
             //DailyWage.CheckDailyWage();
             //PartTimeWage.CheckPartTime();
             //UsingSwitchCase.CheckUsingSwitch();
-            WagesForMonth.CheckMonthWages();
-
-
+            //WagesForMonth.CheckMonthWages();
+            WagesTillCondition.CheckWages();
 
         }
     }
