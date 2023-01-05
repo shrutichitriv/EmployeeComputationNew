@@ -7,6 +7,8 @@
 
             Console.WriteLine("Welcome to the Employee Wage Computation Program");
 
+            EmpAttendance.EmployeeAttendance();
+
         }
     }
 }
