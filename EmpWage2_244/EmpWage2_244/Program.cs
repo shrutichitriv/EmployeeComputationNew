@@ -9,7 +9,9 @@
 
             //EmpAttendance.EmployeeAttendance();
             //DailyWage.CheckDailyWage();
-            PartTimeWage.CheckPartTime();
+            //PartTimeWage.CheckPartTime();
+            UsingSwitchCase.CheckUsingSwitch();
+
 
 
         }
