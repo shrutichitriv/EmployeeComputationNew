@@ -12,7 +12,10 @@
             //PartTimeWage.CheckPartTime();
             //UsingSwitchCase.CheckUsingSwitch();
             //WagesForMonth.CheckMonthWages();
-            WagesTillCondition.CheckWages();
+            //WagesTillCondition.CheckWages();
+            RefactorCode.ComputeEmpWage();
+            
+
 
         }
     }
