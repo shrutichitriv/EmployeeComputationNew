@@ -32,16 +32,21 @@
             //Infosys.CompanyEmpWage();
             //Console.Write(Infosys.toString());
 
-            
-            EmpWageBuilderArray empWageBuilder = new EmpWageBuilderArray();
-            empWageBuilder.addCompanyEmpWage("TCS", 20, 4, 150);
-            empWageBuilder.addCompanyEmpWage("Amazon", 25, 7, 200);
-            empWageBuilder.addCompanyEmpWage("Infosys", 23, 3, 100);
-            empWageBuilder.addCompanyEmpWage("Wipro", 28, 4, 160);
-            empWageBuilder.addCompanyEmpWage("Hansen", 15, 2, 180);
-            empWageBuilder.addCompanyEmpWage("Reliance", 25, 7, 240);
-            empWageBuilder.addCompanyEmpWage("Apple", 40, 5, 260);
-            empWageBuilder.computeEmpWage();
+            //EmpWageBuilderArray empWageBuilder = new EmpWageBuilderArray();
+            //empWageBuilder.addCompanyEmpWage("TCS", 20, 4, 150);
+            //empWageBuilder.addCompanyEmpWage("Amazon", 25, 7, 200);
+            //empWageBuilder.addCompanyEmpWage("Infosys", 23, 3, 100);
+            //empWageBuilder.addCompanyEmpWage("Wipro", 28, 4, 160);
+            //empWageBuilder.addCompanyEmpWage("Hansen", 15, 2, 180);
+            //empWageBuilder.addCompanyEmpWage("Reliance", 25, 7, 240);
+            //empWageBuilder.addCompanyEmpWage("Apple", 40, 5, 260);
+            //empWageBuilder.computeEmpWage();
+
+            EmpWageArray EmpWageBuilder = new EmpWageArray();
+            EmpWageBuilder.addCompanyEmpWage("TechMahindra", 25, 7, 160);
+            EmpWageBuilder.addCompanyEmpWage("LG", 23, 3, 100);
+            EmpWageBuilder.addCompanyEmpWage("Wipro", 28, 4, 160);
+            EmpWageBuilder.computeEmpWage();
 
 
 
