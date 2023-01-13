@@ -24,7 +24,7 @@
             //MultipleCompany.ComputeEmpWage("TCS", 22, 25, 20);
             //MultipleCompany.ComputeEmpWage("Infosys", 15, 26, 24);
 
-            
+
             //TotalWageEachCompany Amazon = new TotalWageEachCompany("Amazon", 30, 25, 20);
             //TotalWageEachCompany Infosys = new TotalWageEachCompany("Infosys", 25, 22, 29);
             //Amazon.CompanyEmpWage();
@@ -42,14 +42,12 @@
             //empWageBuilder.addCompanyEmpWage("Apple", 40, 5, 260);
             //empWageBuilder.computeEmpWage();
 
-            EmpWageArray EmpWageBuilder = new EmpWageArray();
-            EmpWageBuilder.addCompanyEmpWage("TechMahindra", 25, 7, 160);
-            EmpWageBuilder.addCompanyEmpWage("LG", 23, 3, 100);
-            EmpWageBuilder.addCompanyEmpWage("Wipro", 28, 4, 160);
-            EmpWageBuilder.computeEmpWage();
-
-
-
+            EmpWageBuilder empWageBuilder = new EmpWageBuilder();
+            empWageBuilder.addCompanyEmpWage("TechMahindra", 25, 7, 160);
+            empWageBuilder.addCompanyEmpWage("LG", 23, 3, 100);
+            empWageBuilder.addCompanyEmpWage("Wipro", 28, 4, 160);
+            empWageBuilder.computeEmpWage();
+            Console.WriteLine("Total wage for TechMahindra company : " + empWageBuilder.getTotalWage("TechMahindra"));
 
 
 

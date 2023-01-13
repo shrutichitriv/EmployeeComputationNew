@@ -3,66 +3,83 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static EmpWage2_244.EmpWageInterface;
 
 namespace EmpWage2_244
 {
     public class EmpWageInterface
     {
-        public string company;
-        public int empRatePerHour;
-        public int NUM_OF_WORKING_DAYS;
-        public int MAX_HR_PER_MONTH;
-        public int totalEmpWage;
+        public interface IComputeEmpWage
+        {
+            public void addCompanyEmpWage(string company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth);
 
-        public EmpWageInterface(string company, int empRatePerHour, int NUM_OF_WORKING_DAYS, int MAX_HR_PER_MONTH)
-        {
-            this.company = company;
-            this.empRatePerHour = empRatePerHour;
-            this.NUM_OF_WORKING_DAYS = NUM_OF_WORKING_DAYS;
-            this.MAX_HR_PER_MONTH = MAX_HR_PER_MONTH;
+            public void computeEmpWage();
+
+            public int getTotalWage(string company);
         }
-        public void setTotalEmpWage(int totalEmpWage)
+        public class CompanyEmpWage
         {
-            this.totalEmpWage = totalEmpWage;
-        }
-        public string toString()
-        {
-            return "Total Emp Wage for company : " + this.company + " is: " + this.totalEmpWage;
+            public string company;
+            public int empRatePerHour;
+            public int numOfWorkingDays;
+            public int maxHoursPerMonth;
+            public int totalEmpWage;
+
+            public CompanyEmpWage(string company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth)
+            {
+                this.company = company;
+                this.empRatePerHour = empRatePerHour;
+                this.numOfWorkingDays = numOfWorkingDays;
+                this.maxHoursPerMonth = maxHoursPerMonth;
+                this.totalEmpWage = 0;
+            }
+
+            public void setTotalEmpWage(int totalEmpWage)
+            {
+                this.totalEmpWage = totalEmpWage;
+            }
+
+            public string toString()
+            {
+                return "Total Emp Wage for company : " + this.company + "is: " + this.totalEmpWage;
+            }
         }
     }
-    public class EmpWageArray
+    public class EmpWageBuilder: IComputeEmpWage
     {
         public const int IS_PART_TIME = 1;
         public const int IS_FULL_TIME = 2;
 
+        private LinkedList<CompanyEmpWage> companyEmpWageList;
+        private Dictionary<string, CompanyEmpWage> companyToEmpWageMap;
 
-        private int num_of_Company = 0;
-        private EmpWageInterface[] companyEmpWageArray;
-        public EmpWageArray()
+        public EmpWageBuilder()
         {
-            this.companyEmpWageArray = new EmpWageInterface[7];
+            this.companyEmpWageList = new LinkedList<CompanyEmpWage>();
+            this.companyToEmpWageMap = new Dictionary<string, CompanyEmpWage>();
         }
-        public void addCompanyEmpWage(string company, int empRatePerHour, int NUM_OF_WORKING_DAYS, int MAX_HR_PER_MONTH)
+
+        public void addCompanyEmpWage(string company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth)
         {
-            companyEmpWageArray[this.num_of_Company] = new EmpWageInterface(company, empRatePerHour, NUM_OF_WORKING_DAYS, MAX_HR_PER_MONTH);
-            num_of_Company++;
+            CompanyEmpWage companyEmpWage = new CompanyEmpWage(company, empRatePerHour, numOfWorkingDays, maxHoursPerMonth);
+            this.companyEmpWageList.AddLast(companyEmpWage);
+            this.companyToEmpWageMap.Add(company, companyEmpWage);
         }
         public void computeEmpWage()
         {
-            for (int i = 0; i < num_of_Company; i++)
+            foreach (CompanyEmpWage companyEmpWage in this.companyEmpWageList)
             {
-                companyEmpWageArray[i].setTotalEmpWage(this.computeEmpWage(this.companyEmpWageArray[i]));
-                Console.WriteLine(this.companyEmpWageArray[i].toString());
+                companyEmpWage.setTotalEmpWage(this.computeEmpWage(companyEmpWage));
+                Console.WriteLine(companyEmpWage.toString());
             }
         }
-        private int computeEmpWage(EmpWageInterface companyEmpWage)
+        private int computeEmpWage(CompanyEmpWage companyEmpWage)
         {
-            //variables
-            int empHrs = 0;
-            int totalEmpHrs = 0;
-            int totalWorkingDays = 0;
-            //computation
-            while (totalEmpHrs <= companyEmpWage.MAX_HR_PER_MONTH && totalWorkingDays < companyEmpWage.NUM_OF_WORKING_DAYS)
+            //Variables
+            int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0;
+
+            //Computation
+            while (totalEmpHrs <= companyEmpWage.maxHoursPerMonth && totalWorkingDays < companyEmpWage.numOfWorkingDays)
             {
                 totalWorkingDays++;
                 Random random = new Random();
@@ -80,9 +97,14 @@ namespace EmpWage2_244
                         break;
                 }
                 totalEmpHrs += empHrs;
-                Console.WriteLine("Days:" + totalWorkingDays + " Emp Hrs : " + empHrs);
+                Console.WriteLine("Days# : " + totalWorkingDays + " Emp Hrs : " + empHrs);
             }
             return totalEmpHrs * companyEmpWage.empRatePerHour;
         }
+        public int getTotalWage(string company)
+        {
+            return this.companyToEmpWageMap[company].totalEmpWage;
+        }
+            
     }
 }
